@@ -51,7 +51,7 @@ abstract class AbstractLayer extends StatelessWidget {
           onTap: hasTapEvent ? onTap : null,
           child: Container(
             child: childWidget,
-            decoration: BoxDecoration(color: model.wireframeColor.asMaterialColor(), border: Border.all(color: Colors.black)),
+            decoration: BoxDecoration(color: model.wireframeColor.asMaterialColor(), border: Border.all(width: 0.2, color: Colors.black)),
           ),
         )));
   }
