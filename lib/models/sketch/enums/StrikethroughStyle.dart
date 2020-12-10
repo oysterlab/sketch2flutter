@@ -1,0 +1,4 @@
+enum StrikethroughStyle {
+  None,
+  Strikethrough
+}

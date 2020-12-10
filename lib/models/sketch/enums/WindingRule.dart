@@ -1,0 +1,4 @@
+enum WindingRule {
+  NonZero,
+  EvenOdd
+}

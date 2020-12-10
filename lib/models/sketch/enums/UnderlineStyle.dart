@@ -1,0 +1,4 @@
+enum UnderlineStyle {
+  None,
+  Underlined
+}
