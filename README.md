@@ -1,4 +1,4 @@
-# uxcatch_flutter
+# sketch2flutter
 
 A new Flutter project.
 
