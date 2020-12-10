@@ -7,7 +7,7 @@ import 'dart:convert';
 import 'package:archive/archive.dart';
 import 'package:get/get.dart';
 
-import './Controllers/LayerModelController.dart';
+import 'Controllers/LayerModelController.dart';
 import './models/sketch/SketchModel.dart' as SketchModel;
 import './components/sketch/Sketch.dart' as Sketch;
 
@@ -25,7 +25,7 @@ class UXCatchApp extends StatefulWidget {
 
 class _UXCatchAppState extends State<UXCatchApp> {
   List<Sketch.AbstractGroup> _layers;
-  LayerModelController layerModelController = Get.put(LayerModelController([]));
+  LayerModelController layerModelController = Get.put(LayerModelController());
 
   @override
   void initState() {
@@ -53,27 +53,35 @@ class _UXCatchAppState extends State<UXCatchApp> {
 
         SketchModel.Page page = SketchModel.Page.fromMap(pageData);
 
-        print(page);
-
-        // SketchModel.Artboard artboard = page.layers[8];
-        // artboard.frame.x = 0;
-        // artboard.frame.y = 0;
-
-        // _layers.add(Sketch.AbstractGroup(artboard));
+        layerModelController.layers = getLayerModelAsMap(page);
 
         page.layers.forEach((artboard) {
           _layers.add(Sketch.AbstractGroup(artboard));
         });
 
         SketchModel.Artboard artboard = page.layers[0];
+        layerModelController.currentArtboarId = artboard.do_objectID;
         artboard.frame.x = 0;
         artboard.frame.y = 0;
-
         break;
       }
     }
 
     setState(() {});
     print('done');
+  }
+
+  getLayerModelAsMap(SketchModel.AbstractLayer q) {
+    Map<String, SketchModel.AbstractLayer> result = {};
+
+    re(SketchModel.AbstractLayer t) {
+      result[t.do_objectID] = t;
+      if (t is SketchModel.AbstractGroup) {
+        (t as SketchModel.AbstractGroup).layers.forEach((v) => re(v));
+      }
+    }
+
+    re(q);
+    return result;
   }
 }

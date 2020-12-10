@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart' as Material;
 
 class Color {
   final String _class = "color";
@@ -9,7 +10,7 @@ class Color {
 
   dynamic noneFilteredValue;
 
-  Color();
+  Color({this.alpha: null, this.red: null, this.green: null, this.blue: null});
 
   static setModelWithMap(Map<String, dynamic> map, Color model) {
     model.alpha = map['alpha'].toDouble();
@@ -21,25 +22,23 @@ class Color {
     model.blue = map['blue'].toDouble();
 
     model.swatchID = map['swatchID'];
-
-	}
+  }
 
   factory Color.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     Color model = Color();
-	  Color.setModelWithMap(map, model);
+    Color.setModelWithMap(map, model);
     return model;
   }
 
-    factory Color.fromValue(dynamic v) {
-	    Color model = Color();
-	    model.noneFilteredValue = v;
-	    return model;
-	  }
+  factory Color.fromValue(dynamic v) {
+    Color model = Color();
+    model.noneFilteredValue = v;
+    return model;
+  }
 
   Map<String, dynamic> toMap() {
-	  return {
-    };
+    return {};
   }
 
   @override
@@ -47,4 +46,7 @@ class Color {
     return 'Color()';
   }
 
-} 
+  Material.Color asMaterialColor() {
+    return Material.Color.fromARGB((alpha * 255).toInt(), (red * 255).toInt(), (green * 255).toInt(), (blue * 255).toInt());
+  }
+}

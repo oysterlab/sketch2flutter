@@ -1,8 +1,12 @@
 import 'package:get/get.dart';
-import '../models/model.dart' as Sketch;
+import '../models/sketch/SketchModel.dart' as SketchModel;
 
 class LayerModelController extends GetxController {
-  final List<Sketch.Layer> layers;
+  Map<String, SketchModel.AbstractLayer> layers;
+  String currentArtboarId;
 
-  LayerModelController(this.layers);
+  LayerModelController() {
+    this.layers = Map<String, SketchModel.AbstractLayer>();
+    this.currentArtboarId = null;
+  }
 }

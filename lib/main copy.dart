@@ -5,7 +5,7 @@ import 'dart:convert';
 import 'package:archive/archive.dart';
 import 'package:get/get.dart';
 
-import './Controllers/LayerModelController.dart';
+import 'Controllers/LayerModelControllerOld.dart';
 import './models/model.dart' as Sketch;
 import './models/sketch/SketchModel.dart' as SketchModel;
 import './layers/ShapeLayer.dart';
@@ -97,7 +97,7 @@ class _UXCatchAppState extends State<UXCatchApp> {
         Sketch.Page p = Sketch.Page.fromJson(pageData);
         Map<String, Sketch.Layer> flat = flatten(p, true);
         _layers = flat.keys.map((keyName) => flat[keyName]).toList();
-        _layers.forEach((layer) => layerModelController.layers.add(layer));
+        // _layers.forEach((layer) => layerModelController.layers.add(layer));
 
         setState(() {});
         // print(layers);

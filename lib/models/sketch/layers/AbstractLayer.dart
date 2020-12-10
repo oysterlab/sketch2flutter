@@ -2,6 +2,12 @@ import '../objects/ExportOptions.dart';
 import '../objects/Rect.dart';
 import '../objects/FlowConnection.dart';
 import '../objects/Style.dart';
+import 'package:get/get.dart';
+import '../objects/Color.dart';
+
+class RxKeyframe {
+  final value = 0.0.obs;
+}
 
 class AbstractLayer {
   String do_objectID;
@@ -30,6 +36,12 @@ class AbstractLayer {
 
   dynamic noneFilteredValue;
 
+  RxKeyframe rx = RxKeyframe();
+  Color wireframeColor = Color();
+
+  get tick => rx.value.value;
+  set tick(value) => rx.value.value = value;
+
   AbstractLayer();
 
   static setModelWithMap(Map<String, dynamic> map, AbstractLayer model) {
@@ -37,23 +49,23 @@ class AbstractLayer {
 
     model.booleanOperation = map['booleanOperation'];
 
-	  if (map['exportOptions'] is Map) {
-		  model.exportOptions = map['exportOptions'] != null ? new ExportOptions.fromMap(map['exportOptions']) : null;
-	  } else {
-		  model.exportOptions = ExportOptions.fromValue(map['exportOptions']);
-	  }
+    if (map['exportOptions'] is Map) {
+      model.exportOptions = map['exportOptions'] != null ? new ExportOptions.fromMap(map['exportOptions']) : null;
+    } else {
+      model.exportOptions = ExportOptions.fromValue(map['exportOptions']);
+    }
 
-	  if (map['frame'] is Map) {
-		  model.frame = map['frame'] != null ? new Rect.fromMap(map['frame']) : null;
-	  } else {
-		  model.frame = Rect.fromValue(map['frame']);
-	  }
+    if (map['frame'] is Map) {
+      model.frame = map['frame'] != null ? new Rect.fromMap(map['frame']) : null;
+    } else {
+      model.frame = Rect.fromValue(map['frame']);
+    }
 
-	  if (map['flow'] is Map) {
-		  model.flow = map['flow'] != null ? new FlowConnection.fromMap(map['flow']) : null;
-	  } else {
-		  model.flow = FlowConnection.fromValue(map['flow']);
-	  }
+    if (map['flow'] is Map) {
+      model.flow = map['flow'] != null ? new FlowConnection.fromMap(map['flow']) : null;
+    } else {
+      model.flow = FlowConnection.fromValue(map['flow']);
+    }
 
     model.isFixedToViewport = map['isFixedToViewport'];
 
@@ -87,70 +99,64 @@ class AbstractLayer {
 
     model.userInfo = map['userInfo'];
 
-	  if (map['style'] is Map) {
-		  model.style = map['style'] != null ? new Style.fromMap(map['style']) : null;
-	  } else {
-		  model.style = Style.fromValue(map['style']);
-	  }
+    if (map['style'] is Map) {
+      model.style = map['style'] != null ? new Style.fromMap(map['style']) : null;
+    } else {
+      model.style = Style.fromValue(map['style']);
+    }
 
     model.maintainScrollPosition = map['maintainScrollPosition'];
-
-	}
+  }
 
   factory AbstractLayer.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     AbstractLayer model = AbstractLayer();
-	  AbstractLayer.setModelWithMap(map, model);
+    AbstractLayer.setModelWithMap(map, model);
     return model;
   }
 
-    factory AbstractLayer.fromValue(dynamic v) {
-	    AbstractLayer model = AbstractLayer();
-	    model.noneFilteredValue = v;
-	    return model;
-	  }
+  factory AbstractLayer.fromValue(dynamic v) {
+    AbstractLayer model = AbstractLayer();
+    model.noneFilteredValue = v;
+    return model;
+  }
 
   Map<String, dynamic> toMap() {
-	  return {
-    };
+    return {};
   }
 
   @override
   String toString() {
     return 'AbstractLayer()';
   }
+}
 
-} 
 class AbstractLayer_UserInfo {
-
   dynamic noneFilteredValue;
 
   AbstractLayer_UserInfo();
 
-  static setModelWithMap(Map<String, dynamic> map, AbstractLayer_UserInfo model) {
-	}
+  static setModelWithMap(Map<String, dynamic> map, AbstractLayer_UserInfo model) {}
 
   factory AbstractLayer_UserInfo.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     AbstractLayer_UserInfo model = AbstractLayer_UserInfo();
-	  AbstractLayer_UserInfo.setModelWithMap(map, model);
+    AbstractLayer_UserInfo.setModelWithMap(map, model);
     return model;
   }
 
-    factory AbstractLayer_UserInfo.fromValue(dynamic v) {
-	    AbstractLayer_UserInfo model = AbstractLayer_UserInfo();
-	    model.noneFilteredValue = v;
-	    return model;
-	  }
+  factory AbstractLayer_UserInfo.fromValue(dynamic v) {
+    AbstractLayer_UserInfo model = AbstractLayer_UserInfo();
+    model.noneFilteredValue = v;
+    return model;
+  }
 
   Map<String, dynamic> toMap() {
-	  return {
-    };
+    return {};
   }
 
   @override
   String toString() {
     return 'AbstractLayer_UserInfo()';
   }
-
-} 
+}

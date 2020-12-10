@@ -4,7 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import '../models/model.dart' as Sketch;
 import 'package:get/get.dart';
-import '../Controllers/LayerModelController.dart';
+import '../Controllers/LayerModelControllerOld.dart';
 
 import '../enums/ActionType.dart';
 
