@@ -7,6 +7,7 @@ import './AbstractLayer.dart';
 import './AbstractShapeLayer.dart';
 import './TextLayer.dart';
 import './BitmapLayer.dart';
+import './ShapeGroup.dart';
 
 class AbstractGroup extends AbstractLayer {
   AbstractGroup(SketchModel.AbstractGroup model) : super(model) {
@@ -23,9 +24,10 @@ class AbstractGroup extends AbstractLayer {
     model.layers.forEach((layerModel) {
       if (layerModel is SketchModel.AbstractGroup) {
         if (layerModel is SketchModel.ShapeGroup) {
-          print(layerModel);
+          children.add(new ShapeGroup(layerModel));
+        } else {
+          children.add(new AbstractGroup(layerModel));
         }
-        children.add(new AbstractGroup(layerModel));
       } else if (layerModel is SketchModel.AbstractShapeLayer) {
         children.add(new AbstractShapeLayer(layerModel));
       } else if (layerModel is SketchModel.Text) {
