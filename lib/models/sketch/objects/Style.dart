@@ -14,7 +14,7 @@ class Style {
   List borders;
   BorderOptions borderOptions;
   Blur blur;
-  List fills;
+  List<Fill> fills;
   int startMarkerType;
   int endMarkerType;
   int miterLimit;
@@ -33,23 +33,23 @@ class Style {
     model.do_objectID = map['do_objectID'];
 
     if (map['borders'] != null) {
-       model.borders = map['borders'].map((d) => new Border.fromMap(d)).toList();
+      model.borders = map['borders'].map((d) => new Border.fromMap(d)).toList();
     }
 
-	  if (map['borderOptions'] is Map) {
-		  model.borderOptions = map['borderOptions'] != null ? new BorderOptions.fromMap(map['borderOptions']) : null;
-	  } else {
-		  model.borderOptions = BorderOptions.fromValue(map['borderOptions']);
-	  }
+    if (map['borderOptions'] is Map) {
+      model.borderOptions = map['borderOptions'] != null ? new BorderOptions.fromMap(map['borderOptions']) : null;
+    } else {
+      model.borderOptions = BorderOptions.fromValue(map['borderOptions']);
+    }
 
-	  if (map['blur'] is Map) {
-		  model.blur = map['blur'] != null ? new Blur.fromMap(map['blur']) : null;
-	  } else {
-		  model.blur = Blur.fromValue(map['blur']);
-	  }
+    if (map['blur'] is Map) {
+      model.blur = map['blur'] != null ? new Blur.fromMap(map['blur']) : null;
+    } else {
+      model.blur = Blur.fromValue(map['blur']);
+    }
 
     if (map['fills'] != null) {
-       model.fills = map['fills'].map((d) => new Fill.fromMap(d)).toList();
+      model.fills = map['fills'].map<Fill>((d) => new Fill.fromMap(d)).toList();
     }
 
     model.startMarkerType = map['startMarkerType'];
@@ -60,55 +60,52 @@ class Style {
 
     model.windingRule = map['windingRule'];
 
-	  if (map['textStyle'] is Map) {
-		  model.textStyle = map['textStyle'] != null ? new TextStyle.fromMap(map['textStyle']) : null;
-	  } else {
-		  model.textStyle = TextStyle.fromValue(map['textStyle']);
-	  }
+    if (map['textStyle'] is Map) {
+      model.textStyle = map['textStyle'] != null ? new TextStyle.fromMap(map['textStyle']) : null;
+    } else {
+      model.textStyle = TextStyle.fromValue(map['textStyle']);
+    }
 
     if (map['shadows'] != null) {
-       model.shadows = map['shadows'].map((d) => new Shadow.fromMap(d)).toList();
+      model.shadows = map['shadows'].map((d) => new Shadow.fromMap(d)).toList();
     }
 
     if (map['innerShadows'] != null) {
-       model.innerShadows = map['innerShadows'].map((d) => new InnerShadow.fromMap(d)).toList();
+      model.innerShadows = map['innerShadows'].map((d) => new InnerShadow.fromMap(d)).toList();
     }
 
-	  if (map['contextSettings'] is Map) {
-		  model.contextSettings = map['contextSettings'] != null ? new GraphicsContextSettings.fromMap(map['contextSettings']) : null;
-	  } else {
-		  model.contextSettings = GraphicsContextSettings.fromValue(map['contextSettings']);
-	  }
+    if (map['contextSettings'] is Map) {
+      model.contextSettings = map['contextSettings'] != null ? new GraphicsContextSettings.fromMap(map['contextSettings']) : null;
+    } else {
+      model.contextSettings = GraphicsContextSettings.fromValue(map['contextSettings']);
+    }
 
-	  if (map['colorControls'] is Map) {
-		  model.colorControls = map['colorControls'] != null ? new ColorControls.fromMap(map['colorControls']) : null;
-	  } else {
-		  model.colorControls = ColorControls.fromValue(map['colorControls']);
-	  }
-
-	}
+    if (map['colorControls'] is Map) {
+      model.colorControls = map['colorControls'] != null ? new ColorControls.fromMap(map['colorControls']) : null;
+    } else {
+      model.colorControls = ColorControls.fromValue(map['colorControls']);
+    }
+  }
 
   factory Style.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     Style model = Style();
-	  Style.setModelWithMap(map, model);
+    Style.setModelWithMap(map, model);
     return model;
   }
 
-    factory Style.fromValue(dynamic v) {
-	    Style model = Style();
-	    model.noneFilteredValue = v;
-	    return model;
-	  }
+  factory Style.fromValue(dynamic v) {
+    Style model = Style();
+    model.noneFilteredValue = v;
+    return model;
+  }
 
   Map<String, dynamic> toMap() {
-	  return {
-    };
+    return {};
   }
 
   @override
   String toString() {
     return 'Style()';
   }
-
-} 
+}

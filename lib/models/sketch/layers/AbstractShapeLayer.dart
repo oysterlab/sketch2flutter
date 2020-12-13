@@ -5,7 +5,7 @@ class AbstractShapeLayer extends AbstractLayer {
   bool edited;
   bool isClosed;
   int pointRadiusBehaviour;
-  List points;
+  List<CurvePoint> points;
 
   dynamic noneFilteredValue;
 
@@ -21,32 +21,29 @@ class AbstractShapeLayer extends AbstractLayer {
     model.pointRadiusBehaviour = map['pointRadiusBehaviour'];
 
     if (map['points'] != null) {
-       model.points = map['points'].map((d) => new CurvePoint.fromMap(d)).toList();
+      model.points = map['points'].map<CurvePoint>((d) => new CurvePoint.fromMap(d)).toList();
     }
-
-	}
+  }
 
   factory AbstractShapeLayer.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
     AbstractShapeLayer model = AbstractShapeLayer();
-	  AbstractShapeLayer.setModelWithMap(map, model);
+    AbstractShapeLayer.setModelWithMap(map, model);
     return model;
   }
 
-    factory AbstractShapeLayer.fromValue(dynamic v) {
-	    AbstractShapeLayer model = AbstractShapeLayer();
-	    model.noneFilteredValue = v;
-	    return model;
-	  }
+  factory AbstractShapeLayer.fromValue(dynamic v) {
+    AbstractShapeLayer model = AbstractShapeLayer();
+    model.noneFilteredValue = v;
+    return model;
+  }
 
   Map<String, dynamic> toMap() {
-	  return {
-    };
+    return {};
   }
 
   @override
   String toString() {
     return 'AbstractShapeLayer()';
   }
-
-} 
+}

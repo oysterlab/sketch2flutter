@@ -22,6 +22,9 @@ class AbstractGroup extends AbstractLayer {
 
     model.layers.forEach((layerModel) {
       if (layerModel is SketchModel.AbstractGroup) {
+        if (layerModel is SketchModel.ShapeGroup) {
+          print(layerModel);
+        }
         children.add(new AbstractGroup(layerModel));
       } else if (layerModel is SketchModel.AbstractShapeLayer) {
         children.add(new AbstractShapeLayer(layerModel));
@@ -38,7 +41,7 @@ class AbstractGroup extends AbstractLayer {
       }
     });
 
-    childWidget = Stack(
+    child = Stack(
       children: children,
     );
   }
