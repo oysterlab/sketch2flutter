@@ -1,0 +1,28 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "export",
+      "handlers": {
+        "run": "exportToFlutter"
+      },
+      "identifier": "sketch2flutter.export",
+      "script": "__commands.js",
+      "shortcut": "ctrl shift e"
+    }
+  ],
+  "menu": {
+    "title": "sketch2flutter",
+    "items": [
+      "sketch2flutter.export"
+    ]
+  },
+  "version": "0.1.0",
+  "name": "sketch2flutter",
+  "identifier": "sketch2flutter",
+  "disableCocoaScriptPreprocessor": true,
+  "appcast": "https://raw.githubusercontent.com//master/.appcast.xml",
+  "author": "oysterlab",
+  "authorEmail": "oysterlaboratory@gmail.com"
+}

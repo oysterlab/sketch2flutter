@@ -1,0 +1,4 @@
+enum ExportFormatNamingScheme {
+  Suffix,
+  Prefix
+}

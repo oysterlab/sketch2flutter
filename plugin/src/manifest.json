@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/sketch-hq/SketchAPI/develop/docs/sketch-plugin-manifest-schema.json",
+  "icon": "icon.png",
+  "commands": [
+    {
+      "name": "export",
+      "handlers": {
+        "run": "exportToFlutter"
+      },
+      "identifier": "sketch2flutter.export",
+      "script": "./commands.js",
+      "shortcut": "ctrl shift e"
+    }
+  ],
+  "menu": {
+    "title": "sketch2flutter",
+    "items": [
+      "sketch2flutter.export"
+    ]
+  }
+}

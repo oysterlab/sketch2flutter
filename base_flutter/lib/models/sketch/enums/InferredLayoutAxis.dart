@@ -1,0 +1,4 @@
+enum InferredLayoutAxis {
+  Horizontal,
+  Vertical
+}

@@ -1,0 +1,4 @@
+enum NumericalBool {
+  True,
+  False
+}

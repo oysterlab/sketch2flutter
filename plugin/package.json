@@ -1,0 +1,43 @@
+{
+  "name": "sketch2flutter",
+  "version": "0.1.0",
+  "engines": {
+    "sketch": ">=3.0"
+  },
+  "skpm": {
+    "name": "sketch2flutter",
+    "manifest": "src/manifest.json",
+    "main": "sketch2flutter.sketchplugin",
+    "assets": [
+      "assets/**/*"
+    ]
+  },
+  "scripts": {
+    "build": "skpm-build",
+    "watch": "skpm-build --watch",
+    "start": "skpm-build --watch --run",
+    "lint": "eslint .",
+    "postinstall": "npm run build && skpm-link"
+  },
+  "devDependencies": {
+    "@skpm/builder": "<1",
+    "@typescript-eslint/eslint-plugin": "^4.0.1",
+    "@typescript-eslint/parser": "^4.0.1",
+    "eslint": "^7.8.1",
+    "terser-webpack-plugin": "^5.0.0",
+    "ts-loader": "^8.0.0",
+    "typescript": "^4.0.2"
+  },
+  "dependencies": {
+    "@skpm/fs": "^0.2.6",
+    "font-manager": "^0.3.1",
+    "fontkit": "^1.8.1",
+    "json-beautify": "^1.1.1",
+    "json-schema-to-typescript": "^10.0.0",
+    "node-sketch": "^0.14.1",
+    "skpm": "^1.3.1",
+    "unzip": "^0.1.11",
+    "yaml": "^1.10.0"
+  },
+  "author": "oysterlab <oysterlaboratory@gmail.com>"
+}
