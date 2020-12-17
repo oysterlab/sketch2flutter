@@ -1,22 +1,28 @@
 import fs from 'fs'
 import path from 'path'
 import { Constants } from './constants'
+import FontManager from './lib/FontManager'
 
 const unzip = require('unzip')
 
 const META_JSON = 'meta.json'
 
 export default class SketchAsset {
+	fontManager:FontManager
+
+	constructor() {
+		this.fontManager = new FontManager()
+	}
 
 	async streamToJson(stream:any) {
     return new Promise((resolve) => {
-        const chunks: string[] = [];
-        stream.on('data', (chunk:string) => {
-            chunks.push(chunk.toString());
-        });  
-        stream.on('end', () => {
-            resolve(JSON.parse(chunks.join('')))
-        });
+      const chunks: string[] = [];
+      stream.on('data', (chunk:string) => {
+          chunks.push(chunk.toString());
+      });  
+      stream.on('end', () => {
+          resolve(JSON.parse(chunks.join('')))
+      });
     }) 
 	}
 
@@ -55,12 +61,32 @@ export default class SketchAsset {
 		}
 
 		const isImagesCopyDone = await this.copyImages(sketchFilePath, imagesPath)
-		const isFontsCopyDone = await this.copyFonts(sketchFilePath, imagesPath)		
+		const isFontsCopyDone = await this.copyFonts(sketchFilePath, fontsPath)
+		
+		return isImagesCopyDone && isFontsCopyDone
 	}
 
 	async copyFonts(sketchFilePath:string, distPath:string):Promise<boolean> {
 		return new Promise((resolve) => {
-			resolve(true)
+			if (!fs.existsSync(distPath)) {
+				fs.mkdirSync(distPath)
+			}
+		
+			fs.createReadStream(sketchFilePath)
+				.pipe(unzip.Parse())
+				.on('entry', (entry:any) => {
+					const fileName = entry.path;
+			
+					if (fileName === META_JSON) {
+						this.streamToJson(entry).then((result:any) => {
+							const fonts = this.fontManager.getMatchFont(result.fonts)
+							this.fontManager.copy(fonts, distPath)
+							resolve(true)
+						})
+					} else {
+						entry.autodrain();
+					}
+				})
 		})
 	}
 
@@ -102,6 +128,10 @@ export default class SketchAsset {
 					resolve(true)
 				})
 		})
+	}
+
+	getFontSpec(fontPath:string) {
+		return this.fontManager.getFontSpec(fontPath)
 	}
 	
 }

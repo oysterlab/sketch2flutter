@@ -77,9 +77,48 @@ flutter:
     - assets/images/
 
   fonts:
-    - family: Helvetica
+    - family: HelveticaNeue-Regular
       fonts:
-        - asset: fonts/Times_1.ttf
+        - asset: assets/fonts/HelveticaNeue_0.ttf
+    - family: HelveticaNeue-Bold
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_1.ttf
+    - family: HelveticaNeue-Medium
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_10.ttf
+    - family: HelveticaNeue-MediumItalic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_11.ttf
+    - family: HelveticaNeue-Thin
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_12.ttf
+    - family: HelveticaNeue-ThinItalic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_13.ttf
+    - family: HelveticaNeue-Italic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_2.ttf
+    - family: HelveticaNeue-BoldItalic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_3.ttf
+    - family: HelveticaNeue-CondensedBold
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_4.ttf
+    - family: HelveticaNeue-UltraLight
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_5.ttf
+    - family: HelveticaNeue-UltraLightItalic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_6.ttf
+    - family: HelveticaNeue-Light
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_7.ttf
+    - family: HelveticaNeue-LightItalic
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_8.ttf
+    - family: HelveticaNeue-CondensedBlack
+      fonts:
+        - asset: assets/fonts/HelveticaNeue_9.ttf
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

@@ -57,7 +57,7 @@ class TextStylePainter extends StylePainter {
 
       String text = fullText.substring(strAttr.location, strAttr.location + strAttr.length);
 
-      ui.TextStyle textStyle = ui.TextStyle(color: fontColor, fontSize: fontSize);
+      ui.TextStyle textStyle = ui.TextStyle(color: fontColor, fontSize: fontSize, fontFamily: fontName);
 
       textStyles.add({"text": text, "textStyle": textStyle});
     });
@@ -70,11 +70,10 @@ class TextStylePainter extends StylePainter {
     double fontSize = textStyleModel.encodedAttributes.MSAttributedStringFontAttribute.attributes.size;
     String fontFamilyName = textStyleModel.encodedAttributes.MSAttributedStringFontAttribute.attributes.name;
 
-    Color fontColor = textStyleModel.encodedAttributes.MSAttributedStringColorAttribute.asMaterialColor();
-
     paragraphStyle = ui.ParagraphStyle(
       textDirection: TextDirection.ltr,
-      fontFamily: 'Helvetica',
+      fontSize: fontSize,
+      fontFamily: fontFamilyName,
       textAlign: _getTextAlign(textStyleModel.encodedAttributes.paragraphStyle.alignment),
     );
 
