@@ -59,9 +59,9 @@ export default class Sketch2Flutter {
 		const pubspecPath = path.join(flutterPath, Constants.PUBSPEC_FILE)
 
 		if (fs.existsSync(pubspecPath)) {
-
 			const pubspec = YAML.parse(fs.readFileSync(pubspecPath, 'utf-8'))
-
+			
+			//convert fonts into flutter
 			const fontSpecs = fs.readdirSync(fontsPath).reduce((fontSpecs:any, fontFileName:string) => {
 				const fontPath = path.join(fontsPath, fontFileName)
 				const fontSpec:any = this.sketchAsset.getFontSpec(fontPath)
@@ -100,12 +100,22 @@ export default class Sketch2Flutter {
 
 			pubspec.flutter.fonts = flutterFonts
 
+			//convert images into flutter
+			let flutterAssets = pubspec.flutter.assets						
+
+			if (flutterAssets == null) {
+				flutterAssets = []
+			}
+
+			const flutterAssetsPath = path.join(Constants.FLUTTER_ASSETS_DIR_NAME, Constants.FLUTTER_ASSETS_IMAGES_DIR_NAME)
+			if (flutterAssets.find((flutterAsset:string) => flutterAsset == flutterAssetsPath)	== null) {
+				flutterAssets.push(flutterAssetsPath)
+			}
+
+			pubspec.flutter.assets = flutterAssets
+
 			fs.writeFileSync(pubspecPath, YAML.stringify(pubspec), 'utf-8')
-
-			console.log('done') 
-
-
-
+			return true
 		} else {
 			return false
 		}
