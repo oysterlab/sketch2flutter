@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../models/sketch/SketchModel.dart' as SketchModel;
@@ -5,6 +7,9 @@ import 'dart:math';
 import '../../Controllers/LayerModelController.dart';
 import "dart:math" show pi;
 import 'package:vector_math/vector_math_64.dart' show Vector3;
+import 'dart:ui' as ui;
+import 'package:image/image.dart' as IMG;
+import 'package:flutter/services.dart' show rootBundle;
 
 abstract class AbstractLayer extends StatelessWidget {
   final SketchModel.AbstractLayer model;
@@ -197,6 +202,15 @@ class StylePainter extends CustomPainter {
 
   Point scale(Point point, Size size, {scaledByPixel: 0}) {
     return Point(point.x * (size.width + scaledByPixel), point.y * (size.height + scaledByPixel));
+  }
+
+  Future<ui.Image> getUiImage(String imageAssetPath, int width, int height) async {
+    final ByteData assetImageByteData = await rootBundle.load(imageAssetPath);
+    IMG.Image baseSizeImage = IMG.decodeImage(assetImageByteData.buffer.asUint8List());
+    IMG.Image resizeImage = IMG.copyResize(baseSizeImage, height: height, width: width);
+    ui.Codec codec = await ui.instantiateImageCodec(IMG.encodePng(resizeImage));
+    ui.FrameInfo frameInfo = await codec.getNextFrame();
+    return frameInfo.image;
   }
 
   getBlendMode(int sketchBlandMode) {

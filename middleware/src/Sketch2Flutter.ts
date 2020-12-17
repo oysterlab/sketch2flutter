@@ -107,7 +107,7 @@ export default class Sketch2Flutter {
 				flutterAssets = []
 			}
 
-			const flutterAssetsPath = path.join(Constants.FLUTTER_ASSETS_DIR_NAME, Constants.FLUTTER_ASSETS_IMAGES_DIR_NAME)
+			const flutterAssetsPath = path.join(Constants.FLUTTER_ASSETS_DIR_NAME, Constants.FLUTTER_ASSETS_IMAGES_DIR_NAME + '/')
 			if (flutterAssets.find((flutterAsset:string) => flutterAsset == flutterAssetsPath)	== null) {
 				flutterAssets.push(flutterAssetsPath)
 			}
