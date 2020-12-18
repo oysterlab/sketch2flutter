@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uxcatch_flutter/components/sketch/Sketch.dart';
-import 'package:uxcatch_flutter/components/sketch/Contants.dart' as Constants;
+import './Sketch.dart';
+import './Contants.dart' as Constants;
 
 import '../../models/sketch/SketchModel.dart' as SketchModel;
 import 'AbstractGroup.dart';

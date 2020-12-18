@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:uxcatch_flutter/components/sketch/Sketch.dart';
-import 'package:uxcatch_flutter/components/sketch/Contants.dart' as Constants;
+import './Sketch.dart';
+import './Contants.dart' as Constants;
 
 import '../../models/sketch/SketchModel.dart' as SketchModel;
 import './AbstractLayer.dart';
@@ -8,14 +8,23 @@ import './AbstractShapeLayer.dart';
 import './TextLayer.dart';
 import './BitmapLayer.dart';
 import './ShapeGroup.dart';
+import './SKListView.dart';
 
 class AbstractGroup extends AbstractLayer {
   AbstractGroup(SketchModel.AbstractGroup model) : super(model) {
     model.wireframeColor = Constants.WIREFRAME_COLOR_ABSTRACTGROUP;
 
-    createChildren();
+    buildChildren();
   }
 
+  @protected
+  buildChildren() {
+    child = Stack(
+      children: createChildren(),
+    );
+  }
+
+  @protected
   createChildren() {
     SketchModel.AbstractGroup model = this.model;
 
@@ -23,7 +32,9 @@ class AbstractGroup extends AbstractLayer {
 
     model.layers.forEach((layerModel) {
       if (layerModel is SketchModel.AbstractGroup) {
-        if (layerModel is SketchModel.ShapeGroup) {
+        if (layerModel.name == 'ListView') {
+          children.add(new SKListView(layerModel));
+        } else if (layerModel is SketchModel.ShapeGroup) {
           children.add(new ShapeGroup(layerModel));
         } else {
           children.add(new AbstractGroup(layerModel));
@@ -43,8 +54,6 @@ class AbstractGroup extends AbstractLayer {
       }
     });
 
-    child = Stack(
-      children: children,
-    );
+    return children;
   }
 }

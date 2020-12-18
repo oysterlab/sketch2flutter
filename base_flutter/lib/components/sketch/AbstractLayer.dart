@@ -207,7 +207,7 @@ class StylePainter extends CustomPainter {
   Future<ui.Image> getUiImage(String imageAssetPath, int width, int height) async {
     final ByteData assetImageByteData = await rootBundle.load(imageAssetPath);
     IMG.Image baseSizeImage = IMG.decodeImage(assetImageByteData.buffer.asUint8List());
-    IMG.Image resizeImage = IMG.copyResize(baseSizeImage, height: height, width: width);
+    IMG.Image resizeImage = IMG.copyResize(baseSizeImage, height: height, width: width, interpolation: IMG.Interpolation.linear);
     ui.Codec codec = await ui.instantiateImageCodec(IMG.encodePng(resizeImage));
     ui.FrameInfo frameInfo = await codec.getNextFrame();
     return frameInfo.image;

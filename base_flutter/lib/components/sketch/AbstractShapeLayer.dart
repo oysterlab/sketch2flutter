@@ -3,7 +3,7 @@ import '../sketch/AbstractLayer.dart';
 import 'dart:math';
 import '../../models/sketch/SketchModel.dart' as SketchModel;
 
-import 'package:uxcatch_flutter/components/sketch/Contants.dart' as Constants;
+import './Contants.dart' as Constants;
 
 class AbstractShapeLayer extends AbstractLayer {
   AbstractShapeLayer(model) : super(model) {

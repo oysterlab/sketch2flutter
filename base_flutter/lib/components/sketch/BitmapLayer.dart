@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'dart:ui' as ui;
 import '../../models/sketch/SketchModel.dart' as SketchModel;
 
-import 'package:uxcatch_flutter/components/sketch/Contants.dart' as Constants;
+import './Contants.dart' as Constants;
 
 class BitmapLayer extends AbstractLayer {
   BitmapLayer(model) : super(model, stylePainter: BitmapStylePainter(model)) {
@@ -31,13 +31,8 @@ class BitmapStylePainter extends StylePainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    print('paint ' + model.tick.toString());
     // Path path = getShapePath(size);
     // fills(path, bitmapModel.style.fills, canvas);
-
-    if (bitmapModel.name == 'checkBitmap') {
-      print(bitmapModel);
-    }
 
     if (image != null) {
       canvas.save();

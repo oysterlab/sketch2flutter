@@ -9,7 +9,6 @@ import YAML from 'yaml'
 export default class Sketch2Flutter {
 	sketchAsset:SketchAsset = new SketchAsset()
 
-
 	async impl (sketchFilePath:string, flutterPath:string) {
 		
 		if (!this._isSketchFile(sketchFilePath)) {
@@ -26,7 +25,7 @@ export default class Sketch2Flutter {
 			if (createFlutterPath != null) {
 				let isDone = await this.copyAssetsToFlutter(sketchFilePath, createFlutterPath)
 				if (isDone) {
-					this.updatePubspec(flutterPath)
+					this.updatePubspec(createFlutterPath)
 				}				
 				console.log('CREATED_FLUTTER_PROEJCT ', isDone)				
 			} else {
@@ -54,7 +53,6 @@ export default class Sketch2Flutter {
 
 	async updatePubspec(flutterPath:string) {
 		const assetsPath = path.join(flutterPath, Constants.FLUTTER_ASSETS_DIR_NAME)
-		const imagesPath = path.join(assetsPath, Constants.FLUTTER_ASSETS_IMAGES_DIR_NAME)
 		const fontsPath = path.join(assetsPath, Constants.FLUTTER_ASSETS_FONTS_DIR_NAME)
 		const pubspecPath = path.join(flutterPath, Constants.PUBSPEC_FILE)
 
@@ -108,11 +106,39 @@ export default class Sketch2Flutter {
 			}
 
 			const flutterAssetsPath = path.join(Constants.FLUTTER_ASSETS_DIR_NAME, Constants.FLUTTER_ASSETS_IMAGES_DIR_NAME + '/')
+			const flutterSketchPath = path.join(Constants.FLUTTER_ASSETS_DIR_NAME, Constants.FLUTTER_ASSETS_SKETCH_DIR_NAME + '/')			
 			if (flutterAssets.find((flutterAsset:string) => flutterAsset == flutterAssetsPath)	== null) {
 				flutterAssets.push(flutterAssetsPath)
 			}
-
+			if (flutterAssets.find((flutterAsset:string) => flutterAsset == flutterSketchPath)	== null) {
+				flutterAssets.push(flutterSketchPath)
+			}
 			pubspec.flutter.assets = flutterAssets
+
+
+			//dependencies
+			let dependencies = pubspec.dependencies
+			if (dependencies == null) {
+				dependencies = {}
+			}
+
+			Constants.FLUTTER_DEPENDENCIES.forEach((pkg) => {
+				if (dependencies[pkg.name] != null) return
+				dependencies[pkg.name] = pkg.version
+			})
+			pubspec.dependencies = dependencies
+			
+			//dev-dependencies
+			let dveDependencies = pubspec.dev_dependencies
+			if (dveDependencies == null) {
+				dveDependencies = {}
+			}
+
+			Constants.FLUTTER_DEV_DEPENDENCIES.forEach((pkg) => {
+				if (dveDependencies[pkg.name] != null) return
+				dveDependencies[pkg.name] = pkg.version
+			})
+			pubspec.dev_dependencies = dveDependencies
 
 			fs.writeFileSync(pubspecPath, YAML.stringify(pubspec), 'utf-8')
 			return true

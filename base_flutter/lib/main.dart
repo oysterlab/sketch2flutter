@@ -44,7 +44,7 @@ class _UXCatchAppState extends State<UXCatchApp> {
   }
 
   _init() async {
-    var bytes = await rootBundle.load('assets/sketch/hotel-booking-app-amimoradia.sketch');
+    var bytes = await rootBundle.load('assets/sketch/sketch_file.sketch');
     var arch = ZipDecoder().decodeBytes(bytes.buffer.asInt8List());
 
     for (final file in arch) {

@@ -5,6 +5,41 @@ export module Constants {
 	export const FLUTTER_ASSETS_DIR_NAME = 'assets'
 	export const FLUTTER_ASSETS_IMAGES_DIR_NAME = 'images'
 	export const FLUTTER_ASSETS_FONTS_DIR_NAME = 'fonts'	
+	export const FLUTTER_ASSETS_SKETCH_DIR_NAME = 'sketch'		
+
+	export const FLUTTER_SRC_SOURCE_PATH = '../../base_flutter/lib'		
+	
+	export const FLUTTER_DIST_SOURCE_PATH = 'lib'		
+
+	export const FLUTTER_DEPENDENCIES_NAME = 'dependencies'		
+	export const FLUTTER_DEV_DEPENDENCIES_NAME = 'dev_dependencies'		
+
+	export const FLUTTER_DEPENDENCIES = [
+		{
+			name: "get",
+			version: '^3.17.1',
+		},
+		{
+			name: "archive",
+			version: '^2.0.13',
+		},
+		{
+			name: "image",
+			version: '^2.1.19',
+		}		
+	]
+
+	export const FLUTTER_DEV_DEPENDENCIES = [
+		{
+			name: "build_runner",
+			version: "^1.10.4",
+		},
+		{
+			name: "json_serializable",
+			version: "^3.5.0",
+		}
+	]
+
 }
 
 
